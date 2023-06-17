@@ -1,25 +1,60 @@
-import logo from './logo.svg';
+import React from 'react';
+import { fetchContactList, createNewContact, deleteContact, fetchCountryList } from './api/contactList';
+import Table from './Table';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      contactList: [],
+      countryList: []
+    }
+  }
+
+  componentDidMount() {
+    fetchContactList.then((response) => {
+      this.setState({
+        contactList: response
+      })
+    })
+
+    fetchCountryList.then((response) => {
+      this.setState({
+        countryList: response
+      })
+    })
+  }
+
+  updateContactList = (newContact, action) => {
+    if (action === 'Create') {
+      this.setState({
+        contactList: [...this.state.contactList, newContact]
+      })
+    }
+    if (action === 'Delete') {
+      this.setState({
+        contactList: this.state.contactList.filter((contact) => contact !== newContact )
+      })
+    }
+  }
+
+  render() {
+    const { contactList, countryList } = this.state;
+
+    return (
+      <div>
+        <div className="containers">
+          <Table data={contactList !== [] ? contactList : []}
+                 countryList={countryList}
+                 createNewContact={createNewContact}
+                 updateContactList={this.updateContactList}
+                 deleteContact={deleteContact}/>
+        </div>
+      </div>
+    )
+  }
 }
 
-export default App;
+export default (App);
