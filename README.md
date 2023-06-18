@@ -26,4 +26,4 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+This section has moved here: [https://648da9f3bb4a66029046ae69--effortless-alpaca-d18703.netlify.app/](https://648da9f3bb4a66029046ae69--effortless-alpaca-d18703.netlify.app/)
